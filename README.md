@@ -2,6 +2,9 @@
 
 A well documented, tried and tested Samba Active Directory Domain Controller that works with the standard Windows management tools; built from scratch using internal DNS and kerberos and not based on existing containers.
 
+## This fork
+This is a fork of the amazing samba-domain by Fmstrat. Unfortunately the original repository does not provide a ARM 64 version via DockerHub (it only provides AMD 64). This fork is only there for providing a built image on that architecture.
+
 ## Environment variables for quick start
 * `DOMAIN` defaults to `CORP.EXAMPLE.COM` and should be set to your domain
 * `DOMAINPASS` should be set to your administrator password, be it existing or new. This can be removed from the environment after the first setup run.
