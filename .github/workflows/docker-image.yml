@@ -38,4 +38,4 @@ jobs:
         context: ./
         platforms: linux/arm64
         push: true
-        tags: aczwink/samba-domain:latest
+        tags: ghcr.io/aczwink/samba-domain:latest
