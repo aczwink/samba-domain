@@ -4,6 +4,9 @@ Latest documentation available at: https://nowsci.com/#/samba-domain/?id=samba-a
 
 A well documented, tried and tested Samba Active Directory Domain Controller that works with the standard Windows management tools; built from scratch using internal DNS and kerberos and not based on existing containers.
 
+## This fork
+This is a fork of the amazing samba-domain by Fmstrat. Unfortunately the original repository does not provide a ARM 64 version via DockerHub (it only provides AMD 64). This fork is only there for providing a built image on that architecture.
+
 ## Environment variables for quick start
 * `DOMAIN` defaults to `CORP.EXAMPLE.COM` and should be set to your domain
 * `DOMAINPASS` should be set to your administrator password, be it existing or new. This can be removed from the environment after the first setup run.
@@ -26,7 +29,7 @@ A well documented, tried and tested Samba Active Directory Domain Controller tha
 ```
 mkdir -p /data/docker/builds
 cd /data/docker/builds
-git clone https://github.com/Fmstrat/samba-domain.git
+git clone https://github.com/aczwink/samba-domain.git
 cd samba-domain
 docker build -t samba-domain .
 ```
@@ -34,7 +37,7 @@ docker build -t samba-domain .
 Or just use the HUB:
 
 ```
-docker pull nowsci/samba-domain
+docker pull ghcr.io/aczwink/samba-domain
 ```
 
 ## Setting things up for the container
@@ -105,7 +108,7 @@ Then add a share to the end based on how you mount the volume:
 Check the samba documentation for how to allow groups/etc.
 
 ## Examples with docker run
-Keep in mind, for all examples replace `nowsci/samba-domain` with `samba-domain` if you build your own from GitHub.
+Keep in mind, for all examples replace `aczwink/samba-domain` with `samba-domain` if you build your own from GitHub.
 
 Start a new domain, and forward non-resolvable queries to the main DNS server
 * Local site is `192.168.3.0`
@@ -147,7 +150,7 @@ docker run -t -i \
     -h exampledc \
     --name samba \
     --privileged \
-    nowsci/samba-domain
+    aczwink/samba-domain
 ```
 
 Join an existing domain, and forward non-resolvable queries to the main DNS server
@@ -193,7 +196,7 @@ docker run -t -i \
     -h exampledc \
     --name samba \
     --privileged \
-    nowsci/samba-domain
+    aczwink/samba-domain
 ```
 
 Join an existing domain, forward DNS, remove security features, and connect to a remote site via openvpn
@@ -253,7 +256,7 @@ docker run -t -i \
     --cap-add=SYS_NICE \
     --cap-add=SYS_TIME \
     --device /dev/net/tun \
-    nowsci/samba-domain
+    aczwink/samba-domain
 ```
 
 
@@ -274,7 +277,7 @@ services:
 # ----------- samba begin ----------- #
 
   samba:
-    image: nowsci/samba-domain
+    image: aczwink/samba-domain
     container_name: samba
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -339,7 +342,7 @@ services:
 # ----------- samba begin ----------- #
 
   samba:
-    image: nowsci/samba-domain
+    image: aczwink/samba-domain
     container_name: samba
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -408,7 +411,7 @@ services:
 # ----------- samba begin ----------- #
 
   samba:
-    image: nowsci/samba-domain
+    image: aczwink/samba-domain
     container_name: samba
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -498,7 +501,7 @@ Usage:
 ```
 
 ## Joining the domain with Ubuntu
-For joining the domain with any client, everything should work just as you would expect if the active directory server was Windows based. For Ubuntu, there are many guides availble for joining, but to make things easier you can find an easily configurable script for joining your domain here: <https://raw.githubusercontent.com/Fmstrat/samba-domain/master/ubuntu-join-domain.sh>
+For joining the domain with any client, everything should work just as you would expect if the active directory server was Windows based. For Ubuntu, there are many guides availble for joining, but to make things easier you can find an easily configurable script for joining your domain here: <https://raw.githubusercontent.com/aczwink/samba-domain/master/ubuntu-join-domain.sh>
 
 ## Troubleshooting
 

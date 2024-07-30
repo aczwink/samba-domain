@@ -74,9 +74,8 @@ appSetup () {
 			" /etc/samba/smb.conf
 		sed -i "s/LOCALDC/${URDOMAIN}DC/g" /etc/samba/smb.conf
 		if [[ $DNSFORWARDER != "NONE" ]]; then
-			sed -i "/dns forwarder/d" /etc/samba/smb.conf
-			sed -i "/\[global\]/a \
-				\\\tdns forwarder = ${DNSFORWARDER}\
+			sed -i "/dns forwarder =/c \
+        \\\tdns forwarder = ${DNSFORWARDER}\
 				" /etc/samba/smb.conf
 		fi
 		if [[ ${INSECURELDAP,,} == "true" ]]; then
